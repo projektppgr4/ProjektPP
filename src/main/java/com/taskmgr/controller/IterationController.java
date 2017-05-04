@@ -51,8 +51,20 @@ public class IterationController {
 		iterationDao.saveOrUpdate(iteration);
 
 
-		return "redirect:/project/iteration/details?id=" + iteration.getId();
+		return "redirect:/project/details?id=" + project.getId();
 	}
+
+
+	@RequestMapping(value = "/project/iteration/edit", method = RequestMethod.GET)
+	public String editStory(ModelMap model, HttpServletRequest request) {
+		int iterationId = Integer.parseInt(request.getParameter("id"));
+		Iteration iteration = iterationDao.getById(iterationId);
+		model.addAttribute("iteration", iteration);
+		return "/project/iteration/iterationForm";
+	}
+
+
+
 
 
 }

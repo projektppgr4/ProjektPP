@@ -24,11 +24,11 @@ public class Iteration {
 
 	private String name;
 
-	//TODO walidacja daty !!!!
-	@DateTimeFormat(pattern = "MM-dd-yyyy")
+	//TODO walidacja daty albo nie !!!!
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date startDate;
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date endDate;
 
 	@ManyToOne(fetch = FetchType.EAGER)

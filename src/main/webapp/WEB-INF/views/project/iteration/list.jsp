@@ -17,17 +17,19 @@ rozne info
     <table border="1">
         <th>No</th>
         <th>Name</th>
-        <th>Description</th>
+        <th>Start Date</th>
+        <th>End Date</th>
         <th>Actions</th>
         <c:forEach var="iteration" items="${iterationList}" varStatus="status">
             <tr>
                 <td>${status.index + 1}</td>
                 <td>${iteration.name}</td>
                 <td>${iteration.startDate}</td>
+                <td>${iteration.endDate}</td>
                 <td>
-                    <a href="edit?id=${iteration.id}">Edit</a>
+                    <a href="/project/iteration/edit?id=${iteration.id}">Edit</a>
                     &nbsp;
-                    <a href="delete?id=${iteration.id}">Delete</a>
+                    <a href="/project/iteration/delete?id=${iteration.id}">Delete</a>
                     &nbsp;
                     <a href="/project/iteration/details?id=${iteration.id}">Details</a>
                 </td>

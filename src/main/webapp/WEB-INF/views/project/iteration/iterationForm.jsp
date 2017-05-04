@@ -4,6 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="type" uri="http://www.springframework.org/tags/form" %>
 <html>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>New or Edit Iteration</title>
@@ -20,11 +21,11 @@
             </tr>
             <tr>
                 <td>Start Date (form MM-dd-yyyy):</td>
-                <td><form:input path="startDate" cssClass="form-control"/></td>
+                <td><form:input path="startDate" type="date"/></td>
             </tr>
             <tr>
                 <td>End Date:</td>
-                <td><form:input path="endDate" cssClass="form-control"/></td>
+                <td><form:input path="endDate" type="date"/></td>
             </tr>
             <tr>
                 <td colspan="2" align="center">
