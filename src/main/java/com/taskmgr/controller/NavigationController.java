@@ -23,7 +23,7 @@ import java.util.List;
  */
 
 @Controller
-public class ProjectController {
+public class NavigationController {
 
 	@Autowired
 	ProjectDao projectDao;
@@ -52,6 +52,8 @@ public class ProjectController {
 	public String projectDetails(ModelMap model, HttpServletRequest request) {
 		int projectId = Integer.parseInt(request.getParameter("id"));
 		List<Iteration> iterationList = iterationDao.getByProjectId(projectId);
+
+		model.addAttribute("projectId", projectId);
 		model.addAttribute("iterationList", iterationList);
 		return "/project/iteration/list";
 	}

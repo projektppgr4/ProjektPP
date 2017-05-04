@@ -1,5 +1,7 @@
 package com.taskmgr.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -22,11 +24,14 @@ public class Iteration {
 
 	private String name;
 
+	//TODO walidacja daty !!!!
+	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	private Date startDate;
 
+	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	private Date endDate;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "PROJECT_ID", nullable = false)
 	private Project project;
 

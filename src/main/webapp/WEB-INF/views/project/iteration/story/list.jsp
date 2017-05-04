@@ -5,7 +5,7 @@
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Lista Story</title>
 </head>
 <body>
 Iteration details i jego story do wgladu

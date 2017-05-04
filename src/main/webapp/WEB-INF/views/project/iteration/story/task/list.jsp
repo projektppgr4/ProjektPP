@@ -5,7 +5,7 @@
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <title>Tasks</title>
+    <title>Lista Taskow</title>
 </head>
 <body>
 

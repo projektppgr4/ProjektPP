@@ -16,4 +16,10 @@ public interface IterationDao {
 
 	@Transactional
 	Iteration getById(int id);
+
+	@Transactional
+	void saveOrUpdate(Iteration i);
+
+	@Transactional
+	void delete(Iteration i);
 }

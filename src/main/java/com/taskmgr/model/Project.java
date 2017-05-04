@@ -30,7 +30,7 @@ public class Project {
 
 	private Date completionDate;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
 	private Set<Iteration> iterations = new HashSet<Iteration>(0);
 
 

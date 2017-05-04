@@ -5,13 +5,15 @@
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <title>details</title>
+    <title>Lista Iteracji</title>
 </head>
 <body>
 Project details i jego iteracje do wgladu
 
 rozne info
 <div align="center">
+    <h1>Iteration List</h1>
+    <h2><a href="/project/newIteration?projectId=${projectId}">New Iteration</a></h2>
     <table border="1">
         <th>No</th>
         <th>Name</th>

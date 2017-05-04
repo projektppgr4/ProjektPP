@@ -21,7 +21,6 @@
 
     <li><a href="admin">Admin</a></li>
     <li><a href="/project/list">Project</a></li>
-    <li><a href="list">List</a></li>
 </ul>
 </body>
 </html>
