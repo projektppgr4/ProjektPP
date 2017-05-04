@@ -29,7 +29,7 @@ public class IterationController {
 	private ProjectDao projectDao;
 
 	@RequestMapping(value = "/project/newIteration", method = RequestMethod.GET)
-	public String createNewStory(ModelMap model, HttpServletRequest request, HttpSession session) {
+	public String createNewIteration(ModelMap model, HttpServletRequest request, HttpSession session) {
 		Project project = projectDao.getById((Integer.parseInt(request.getParameter("projectId"))));
 		session.setAttribute("project", project);
 		Iteration newIteration = new Iteration();
@@ -38,7 +38,7 @@ public class IterationController {
 	}
 
 	@RequestMapping(value = "/project/iteration/save", method = RequestMethod.POST)
-	public String saveTask(@ModelAttribute("iteration") Iteration iteration, HttpServletRequest request, HttpSession session) {
+	public String saveIteration(@ModelAttribute("iteration") Iteration iteration, HttpServletRequest request, HttpSession session) {
 		Project project;
 		if (iterationDao.getById(iteration.getId()) == null) {
 			project = (Project) session.getAttribute("project");
@@ -56,7 +56,7 @@ public class IterationController {
 
 
 	@RequestMapping(value = "/project/iteration/edit", method = RequestMethod.GET)
-	public String editStory(ModelMap model, HttpServletRequest request) {
+	public String editIteration(ModelMap model, HttpServletRequest request) {
 		int iterationId = Integer.parseInt(request.getParameter("id"));
 		Iteration iteration = iterationDao.getById(iterationId);
 		model.addAttribute("iteration", iteration);
@@ -65,7 +65,7 @@ public class IterationController {
 
 
 	@RequestMapping(value = "/project/iteration/delete", method = RequestMethod.GET)
-	public String deleteStory(ModelMap model, HttpServletRequest request) {
+	public String deleteIteration(ModelMap model, HttpServletRequest request) {
 		int iterationId = Integer.parseInt(request.getParameter("id"));
 		Iteration deleteIteration = iterationDao.getById(iterationId);
 		iterationDao.delete(deleteIteration);

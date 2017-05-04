@@ -1,5 +1,7 @@
 package com.taskmgr.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -26,8 +28,10 @@ public class Project {
 
 	private String description;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date startDate;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date completionDate;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project")

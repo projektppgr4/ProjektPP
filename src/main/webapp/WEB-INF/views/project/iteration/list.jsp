@@ -37,5 +37,6 @@ rozne info
         </c:forEach>
     </table>
 </div>
+<a href="/">Home</a>
 </body>
 </html>

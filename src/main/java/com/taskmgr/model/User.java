@@ -32,7 +32,7 @@ public class User {
 	private String state = State.ACTIVE.getState();
 
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
 	private Set<Project> projects = new HashSet<Project>(0);
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "APP_USER_USER_PROFILE",

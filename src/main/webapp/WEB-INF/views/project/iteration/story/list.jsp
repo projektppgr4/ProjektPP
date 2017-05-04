@@ -32,6 +32,6 @@ Iteration details i jego story do wgladu
         </c:forEach>
     </table>
 </div>
-
+<a href="/">Home</a>
 </body>
 </html>

@@ -34,5 +34,6 @@ Story details i jego taski do wgladu
         </c:forEach>
     </table>
 </div>
+<a href="/">Home</a>
 </body>
 </html>

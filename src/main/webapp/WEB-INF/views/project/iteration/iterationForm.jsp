@@ -20,7 +20,7 @@
                 <td><form:input path="name"/></td>
             </tr>
             <tr>
-                <td>Start Date (form MM-dd-yyyy):</td>
+                <td>Start Date:</td>
                 <td><form:input path="startDate" type="date"/></td>
             </tr>
             <tr>

@@ -1,7 +1,10 @@
 package com.taskmgr.dao.Implementation;
 
 import com.taskmgr.dao.AbstractDao;
+import com.taskmgr.model.Iteration;
 import com.taskmgr.model.Project;
+import com.taskmgr.model.Story;
+import com.taskmgr.model.Task;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -14,13 +17,29 @@ import java.util.List;
  */
 
 @Transactional
-@Repository
+@Repository("projectDao")
 public class ProjectDaoImpl extends AbstractDao<Integer, Project> implements com.taskmgr.dao.ProjectDao {
 
 	@Transactional
 	public Project getById(int id) {
 		return getByKey(id);
 
+	}
+
+
+	@Override
+	public void delete(Project project) {
+		for (Iteration iteration : project.getIterations()) {
+			for (Story story : iteration.getStories()) {
+				for (Task task : story.getTasks()) {
+					getSession().delete(task);
+				}
+				getSession().delete(story);
+			}
+			getSession().delete(iteration);
+		}
+
+		getSession().delete(project);
 	}
 
 

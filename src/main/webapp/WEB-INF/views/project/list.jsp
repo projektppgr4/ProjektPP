@@ -19,12 +19,16 @@ Lista porojektów użytkownika
         <th>No</th>
         <th>Name</th>
         <th>Description</th>
+        <th>Start Date</th>
+        <th>Completion Date</th>
         <th>Actions</th>
         <c:forEach var="project" items="${projects}" varStatus="status">
             <tr>
                 <td>${status.index + 1}</td>
                 <td>${project.name}</td>
                 <td>${project.description}</td>
+                <td>${project.startDate}</td>
+                <td>${project.completionDate}</td>
                 <td>
                     <a href="edit?id=${project.id}">Edit</a>
                     &nbsp;
@@ -36,5 +40,6 @@ Lista porojektów użytkownika
         </c:forEach>
     </table>
 </div>
+<a href="/">Home</a>
 </body>
 </html>

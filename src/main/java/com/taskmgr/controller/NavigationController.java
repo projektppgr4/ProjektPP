@@ -1,12 +1,10 @@
 package com.taskmgr.controller;
 
-import com.taskmgr.dao.IterationDao;
-import com.taskmgr.dao.ProjectDao;
-import com.taskmgr.dao.StoryDao;
-import com.taskmgr.dao.TaskDao;
+import com.taskmgr.dao.*;
 import com.taskmgr.model.Iteration;
 import com.taskmgr.model.Project;
 import com.taskmgr.model.Story;
+import com.taskmgr.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,11 +35,17 @@ public class NavigationController {
 	@Autowired
 	TaskDao taskDao;
 
+	@Autowired
+	UserDao userDao;
+
 
 	@RequestMapping(value = "/project/list", method = RequestMethod.GET)
 	public String projectsPage(ModelMap model) {
 		String userName = getPrincipal();
 		List<Project> projectList = projectDao.findAllUserProjects(userName);
+		User user = userDao.findBySSO(userName);
+
+		model.addAttribute("userId", user.getId());
 		model.addAttribute("projects", projectList);
 		return "/project/list";
 	}
