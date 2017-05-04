@@ -64,7 +64,13 @@ public class IterationController {
 	}
 
 
-
+	@RequestMapping(value = "/project/iteration/delete", method = RequestMethod.GET)
+	public String deleteStory(ModelMap model, HttpServletRequest request) {
+		int iterationId = Integer.parseInt(request.getParameter("id"));
+		Iteration deleteIteration = iterationDao.getById(iterationId);
+		iterationDao.delete(deleteIteration);
+		return "redirect:/project/details?id=" + deleteIteration.getProject().getId();
+	}
 
 
 }

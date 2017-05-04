@@ -24,7 +24,7 @@ public class Iteration {
 
 	private String name;
 
-	//TODO walidacja daty albo nie !!!!
+	//TODO walidacja daty albo nie
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date startDate;
 

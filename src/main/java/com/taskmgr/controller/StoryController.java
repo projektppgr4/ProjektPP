@@ -67,7 +67,7 @@ public class StoryController {
 		int storyId = Integer.parseInt(request.getParameter("id"));
 		Story deleteStory = storyDao.getById(storyId);
 		storyDao.delete(deleteStory);
-		return "redirect:/project/iteration/story/details?id=" + deleteStory.getIteration().getId();
+		return "redirect:/project/iteration/details?id=" + deleteStory.getIteration().getId();
 	}
 
 }

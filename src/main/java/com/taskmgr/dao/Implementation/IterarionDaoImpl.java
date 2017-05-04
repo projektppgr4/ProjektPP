@@ -4,6 +4,7 @@ import com.taskmgr.dao.AbstractDao;
 import com.taskmgr.dao.IterationDao;
 import com.taskmgr.model.Iteration;
 import com.taskmgr.model.Story;
+import com.taskmgr.model.Task;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -28,6 +29,10 @@ public class IterarionDaoImpl extends AbstractDao<Integer, Iteration> implements
 	@Override
 	public void delete(Iteration iteration) {
 		for (Story story : iteration.getStories()) {
+			for (Task task : story.getTasks()) {
+				getSession().delete(task);
+
+			}
 			getSession().delete(story);
 
 		}
