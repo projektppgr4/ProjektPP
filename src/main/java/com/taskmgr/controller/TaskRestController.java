@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Deprecated
 @RestController
 public class TaskRestController {
+	void Test12() {
 
+	}
 
 }
