@@ -34,11 +34,22 @@ public class User {
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
 	private Set<Project> projects = new HashSet<Project>(0);
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "APP_USER_USER_PROFILE",
 			joinColumns = {@JoinColumn(name = "USER_ID")},
 			inverseJoinColumns = {@JoinColumn(name = "USER_PROFILE_ID")})
 	private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "TASK_USER",
+			joinColumns = {@JoinColumn(name = "USER_ID")},
+			inverseJoinColumns = {@JoinColumn(name = "TASK_ID")})
+	private Set<Task> userTasks = new HashSet<Task>();
+
+
+	public User() {
+	}
 
 	public Set<Project> getProjects() {
 		return projects;
@@ -112,5 +123,11 @@ public class User {
 		this.userProfiles = userProfiles;
 	}
 
+	public Set<Task> getUserTasks() {
+		return userTasks;
+	}
 
+	public void setUserTasks(Set<Task> userTasks) {
+		this.userTasks = userTasks;
+	}
 }

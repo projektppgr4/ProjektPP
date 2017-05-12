@@ -21,4 +21,8 @@ public interface UserDao {
 
 	@Transactional
 	List<User> findAll();
+
+	@Transactional
+	List<User> findByLastNameBegin(String lastName);
+
 }

@@ -5,32 +5,26 @@
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <title>Lista Taskow</title>
+    <title>User to add</title>
 </head>
 <body>
 
-Story details i jego taski do wgladu
+Lista Userow ktorym można dać taska
 
 <div align="center">
     <h1>Task List</h1>
-    <h2><a href="/project/iteration/story/newTask?storyId=${storyId}">New Task</a></h2>
-
     <table border="1">
         <th>No</th>
         <th>Name</th>
         <th>Duration</th>
         <th>Actions</th>
-        <c:forEach var="task" items="${taskList}" varStatus="status">
+        <c:forEach var="user" items="${userList}" varStatus="status">
             <tr>
                 <td>${status.index + 1}</td>
-                <td>${task.name}</td>
-                <td>${task.duration}</td>
+                <td>${user.firstName}</td>
+                <td>${user.lastName}</td>
                 <td>
-                    <a href="/project/iteration/story/task/edit?id=${task.id}">Edit</a>
-                    &nbsp;
-                    <a href="/project/iteration/story/task/delete?id=${task.id}">Delete</a>
-                    &nbsp;
-                    <a href="/project/iteration/story/task/assignToTask?id=${task.id}">Assign worker</a>
+                    <a href="/project/iteration/story/task/assign?id=${user.id}">Assign worker</a>
                 </td>
             </tr>
         </c:forEach>

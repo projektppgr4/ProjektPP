@@ -37,5 +37,15 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		return usersList;
 	}
 
+	@Transactional
+	public List<User> findByLastNameBegin(String lastName) {
+		List<User> usersList = (List<User>) getSession()
+				.createCriteria(User.class)
+				.add(Restrictions.like("lastName", lastName + "%"))
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+
+		return usersList;
+	}
+
 }
 

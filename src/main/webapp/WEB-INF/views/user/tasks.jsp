@@ -5,16 +5,15 @@
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <title>Lista Taskow</title>
+    <title>Lista Zadan</title>
 </head>
 <body>
 
-Story details i jego taski do wgladu
+
+Lista zadań przydzielonych do użytkownika
 
 <div align="center">
     <h1>Task List</h1>
-    <h2><a href="/project/iteration/story/newTask?storyId=${storyId}">New Task</a></h2>
-
     <table border="1">
         <th>No</th>
         <th>Name</th>
@@ -28,9 +27,6 @@ Story details i jego taski do wgladu
                 <td>
                     <a href="/project/iteration/story/task/edit?id=${task.id}">Edit</a>
                     &nbsp;
-                    <a href="/project/iteration/story/task/delete?id=${task.id}">Delete</a>
-                    &nbsp;
-                    <a href="/project/iteration/story/task/assignToTask?id=${task.id}">Assign worker</a>
                 </td>
             </tr>
         </c:forEach>

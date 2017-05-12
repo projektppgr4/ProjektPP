@@ -17,10 +17,12 @@
     <li><a href="/registration">Register</a></li>
 
     <li><a href="/login">Login</a></li>
+    <li><a href="/logout">Logout</a></li>
     <br>
 
     <li><a href="admin">Admin</a></li>
     <li><a href="/project/list">Project</a></li>
+    <li><a href="/user/getTasks">My Tasks</a></li>
 </ul>
 </body>
 </html>
