@@ -27,7 +27,7 @@ public class StoryController {
 	@Autowired
 	private StoryDao storyDao;
 
-	@RequestMapping(value = "/project/iteration/newStory", method = RequestMethod.GET)
+	@RequestMapping(value = "/project/iteration/story/newStory", method = RequestMethod.GET)
 	public String createNewStory(ModelMap model, HttpServletRequest request, HttpSession session) {
 		Iteration iteration = iterationDao.getById((Integer.parseInt(request.getParameter("iterationId"))));
 		session.setAttribute("iteration", iteration);

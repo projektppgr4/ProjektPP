@@ -14,7 +14,7 @@ Lista porojektów użytkownika
 
 <div align="center">
     <h1>Project List</h1>
-    <h2><a href="/project/newProject?userId=${userId}">New Project</a></h2>
+    <h2><a href="newProject?userId=${userId}">New Project</a></h2>
     <table border="1">
         <th>No</th>
         <th>Name</th>

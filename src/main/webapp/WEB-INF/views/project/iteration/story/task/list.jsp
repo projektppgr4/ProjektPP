@@ -13,7 +13,7 @@ Story details i jego taski do wgladu
 
 <div align="center">
     <h1>Task List</h1>
-    <h2><a href="/project/iteration/story/newTask?storyId=${storyId}">New Task</a></h2>
+    <h2><a href="task/newTask?storyId=${storyId}">New Task</a></h2>
 
     <table border="1">
         <th>No</th>
@@ -26,11 +26,11 @@ Story details i jego taski do wgladu
                 <td>${task.name}</td>
                 <td>${task.duration}</td>
                 <td>
-                    <a href="/project/iteration/story/task/edit?id=${task.id}">Edit</a>
+                    <a href="task/edit?id=${task.id}">Edit</a>
                     &nbsp;
-                    <a href="/project/iteration/story/task/delete?id=${task.id}">Delete</a>
+                    <a href="task/delete?id=${task.id}">Delete</a>
                     &nbsp;
-                    <a href="/project/iteration/story/task/assignToTask?id=${task.id}">Assign worker</a>
+                    <a href="task/assignToTask?id=${task.id}">Assign worker</a>
                 </td>
             </tr>
         </c:forEach>

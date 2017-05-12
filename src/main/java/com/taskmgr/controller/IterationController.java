@@ -28,7 +28,7 @@ public class IterationController {
 	@Autowired
 	private ProjectDao projectDao;
 
-	@RequestMapping(value = "/project/newIteration", method = RequestMethod.GET)
+	@RequestMapping(value = "/project/iteration/newIteration", method = RequestMethod.GET)
 	public String createNewIteration(ModelMap model, HttpServletRequest request, HttpSession session) {
 		Project project = projectDao.getById((Integer.parseInt(request.getParameter("projectId"))));
 		session.setAttribute("project", project);

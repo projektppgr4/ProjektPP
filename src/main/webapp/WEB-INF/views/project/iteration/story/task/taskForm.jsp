@@ -12,7 +12,7 @@
 <div align="center">
     <h1>New/Edit Task</h1>
     <table>
-        <form:form action="/project/iteration/story/task/save" method="post" modelAttribute="task">
+        <form:form action="save" method="post" modelAttribute="task">
             <form:hidden path="id"/>
 
 

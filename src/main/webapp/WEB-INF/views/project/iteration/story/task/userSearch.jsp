@@ -12,7 +12,7 @@
 <div align="center">
     <h1>Search User</h1>
     <table>
-        <form:form action="/project/iteration/story/task/userToFind" method="post" modelAttribute="user">
+        <form:form action="userToFind" method="post" modelAttribute="user">
             <tr>
                 <td>Name:</td>
                 <td><form:input path="lastName"/></td>

@@ -16,7 +16,7 @@ nowy projekt lub edycja
 <div align="center">
     <h1>New/EditProject</h1>
     <table>
-        <form:form action="/project/save" method="post" modelAttribute="project">
+        <form:form action="save" method="post" modelAttribute="project">
             <form:hidden path="id"/>
             <tr>
                 <td>Name:</td>

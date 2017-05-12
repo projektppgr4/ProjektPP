@@ -13,7 +13,7 @@
 <div align="center">
     <h1>New/Edit Iteration</h1>
     <table>
-        <form:form action="/project/iteration/save" method="post" modelAttribute="iteration">
+        <form:form action="save" method="post" modelAttribute="iteration">
             <form:hidden path="id"/>
             <tr>
                 <td>Name:</td>

@@ -13,7 +13,7 @@ Project details i jego iteracje do wgladu
 rozne info
 <div align="center">
     <h1>Iteration List</h1>
-    <h2><a href="/project/newIteration?projectId=${projectId}">New Iteration</a></h2>
+    <h2><a href="iteration/newIteration?projectId=${projectId}">New Iteration</a></h2>
     <table border="1">
         <th>No</th>
         <th>Name</th>
@@ -27,11 +27,11 @@ rozne info
                 <td>${iteration.startDate}</td>
                 <td>${iteration.endDate}</td>
                 <td>
-                    <a href="/project/iteration/edit?id=${iteration.id}">Edit</a>
+                    <a href="iteration/edit?id=${iteration.id}">Edit</a>
                     &nbsp;
-                    <a href="/project/iteration/delete?id=${iteration.id}">Delete</a>
+                    <a href="iteration/delete?id=${iteration.id}">Delete</a>
                     &nbsp;
-                    <a href="/project/iteration/details?id=${iteration.id}">Details</a>
+                    <a href="iteration/details?id=${iteration.id}">Details</a>
                 </td>
             </tr>
         </c:forEach>

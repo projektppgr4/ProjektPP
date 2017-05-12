@@ -10,7 +10,7 @@
 
 <body>
 <div align="center">
-    <c:url var="loginUrl" value="/login"/>
+    <c:url var="loginUrl" value="login"/>
     <form action="${loginUrl}" method="post">
         <c:if test="${param.error != null}">
             <p>Invalid username and password.</p>

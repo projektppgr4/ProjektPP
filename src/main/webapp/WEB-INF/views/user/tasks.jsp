@@ -25,7 +25,7 @@ Lista zadań przydzielonych do użytkownika
                 <td>${task.name}</td>
                 <td>${task.duration}</td>
                 <td>
-                    <a href="/project/iteration/story/task/edit?id=${task.id}">Edit</a>
+                    <a href="project/iteration/story/task/edit?id=${task.id}">Edit</a>
                     &nbsp;
                 </td>
             </tr>

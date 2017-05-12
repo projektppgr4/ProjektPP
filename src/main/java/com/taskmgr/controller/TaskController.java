@@ -33,7 +33,7 @@ public class TaskController {
 	@Autowired
 	private UserDao userDao;
 
-	@RequestMapping(value = "/project/iteration/story/newTask", method = RequestMethod.GET)
+	@RequestMapping(value = "/project/iteration/story/task/newTask", method = RequestMethod.GET)
 	public String createNewTask(ModelMap model, HttpServletRequest request, HttpSession session) {
 		Story story = storyDao.getById((Integer.parseInt(request.getParameter("storyId"))));
 		session.setAttribute("story", story);

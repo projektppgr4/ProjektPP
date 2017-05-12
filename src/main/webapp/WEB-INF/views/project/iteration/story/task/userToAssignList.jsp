@@ -24,7 +24,7 @@ Lista Userow ktorym można dać taska
                 <td>${user.firstName}</td>
                 <td>${user.lastName}</td>
                 <td>
-                    <a href="/project/iteration/story/task/assign?id=${user.id}">Assign worker</a>
+                    <a href="assign?id=${user.id}">Assign worker</a>
                 </td>
             </tr>
         </c:forEach>
