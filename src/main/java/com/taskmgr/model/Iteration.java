@@ -38,6 +38,8 @@ public class Iteration {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "iteration")
 	private Set<Story> stories = new HashSet<Story>(0);
 
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "iteration")
+	private Set<TaskStatus> taskStatuses = new HashSet<TaskStatus>(0);
 
 	public int getId() {
 		return id;

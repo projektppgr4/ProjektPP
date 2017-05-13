@@ -1,6 +1,7 @@
 package com.taskmgr.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 
 /**
  * Created by Akai on 2017-03-28.
@@ -15,6 +16,8 @@ public class Task {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
+
+	@Min(0)
 	private int duration;
 
 
@@ -22,6 +25,8 @@ public class Task {
 	@JoinColumn(name = "STORY_ID", nullable = true)
 	private Story story;
 
+	@ManyToOne
+	private TaskStatus taskStatus;
 
 	public int getId() {
 		return id;
@@ -53,5 +58,13 @@ public class Task {
 
 	public void setStory(Story story) {
 		this.story = story;
+	}
+
+	public TaskStatus getTaskStatus() {
+		return taskStatus;
+	}
+
+	public void setTaskStatus(TaskStatus taskStatus) {
+		this.taskStatus = taskStatus;
 	}
 }

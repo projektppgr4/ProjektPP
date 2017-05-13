@@ -18,14 +18,15 @@ Lista zadań przydzielonych do użytkownika
         <th>No</th>
         <th>Name</th>
         <th>Duration</th>
-        <th>Actions</th>
+        <th>Task Status</th>
         <c:forEach var="task" items="${taskList}" varStatus="status">
             <tr>
                 <td>${status.index + 1}</td>
                 <td>${task.name}</td>
                 <td>${task.duration}</td>
+                <td>${task.taskStatus}</td>
                 <td>
-                    <a href="project/iteration/story/task/edit?id=${task.id}">Edit</a>
+                    <a href="work?id=${task.id}">Work</a>
                     &nbsp;
                 </td>
             </tr>

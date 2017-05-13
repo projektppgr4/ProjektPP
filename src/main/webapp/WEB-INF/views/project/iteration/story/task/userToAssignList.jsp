@@ -12,7 +12,7 @@
 Lista Userow ktorym można dać taska
 
 <div align="center">
-    <h1>Task List</h1>
+    <h1>User to assing list</h1>
     <table border="1">
         <th>No</th>
         <th>Name</th>

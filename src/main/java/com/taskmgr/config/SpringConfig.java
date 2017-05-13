@@ -39,7 +39,6 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
 		r1.setSuffix(".jsp");
 		r1.setViewClass(JstlView.class);
 		resolvers.add(r1);
-
 		JsonViewResolver r2 = new JsonViewResolver();
 		resolvers.add(r2);
 

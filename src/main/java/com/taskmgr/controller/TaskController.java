@@ -9,12 +9,15 @@ import com.taskmgr.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -105,5 +108,28 @@ public class TaskController {
 		user.getUserTasks().add(task);
 		userDao.saveOrUpdate(user);
 		return "redirect:/project/iteration/story/details?id=" + task.getStory().getId();
+	}
+
+	@RequestMapping(value = "/user/work", method = RequestMethod.GET)
+	public String work(ModelMap model, HttpServletRequest request) {
+		int taskId = Integer.parseInt(request.getParameter("id"));
+		Task task = taskDao.getById(taskId);
+		model.addAttribute("task", task);
+		model.addAttribute("story", task.getStory());
+		model.addAttribute("iteration", task.getStory().getIteration());
+		model.addAttribute("project", task.getStory().getIteration().getProject());
+		return "user/workStatus";
+	}
+
+	@PostMapping(value = "/user/changeTime")
+	public String changeTime(@Valid @ModelAttribute("task") Task task, BindingResult result) {
+		Story story;
+		story = taskDao.getById(task.getId()).getStory();
+		task.setStory(story);
+
+		if (!result.hasErrors())
+			taskDao.saveOrUpdate(task);
+
+		return "redirect:/user/work?id=" + task.getId();
 	}
 }
