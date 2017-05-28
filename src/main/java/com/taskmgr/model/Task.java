@@ -1,5 +1,7 @@
 package com.taskmgr.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 
@@ -20,11 +22,13 @@ public class Task {
 	@Min(0)
 	private int duration;
 
-
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "STORY_ID", nullable = true)
 	private Story story;
 
+	//TODO nie jestem pewien czy ignor czy inne rozwiazanie
+	@JsonIgnore
 	@ManyToOne
 	private TaskStatus taskStatus;
 
@@ -67,4 +71,6 @@ public class Task {
 	public void setTaskStatus(TaskStatus taskStatus) {
 		this.taskStatus = taskStatus;
 	}
+
+
 }

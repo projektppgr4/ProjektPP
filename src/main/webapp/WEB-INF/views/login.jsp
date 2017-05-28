@@ -23,7 +23,6 @@
 
         <input type="text" id="username" name="ssoId" placeholder="Enter Username" required>
         <input type="password" id="password" name="password" placeholder="Enter Password" required>
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
         <div class="form-actions">
             <input type="submit" value="Log in">

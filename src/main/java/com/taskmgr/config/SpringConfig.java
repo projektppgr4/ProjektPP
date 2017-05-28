@@ -1,4 +1,3 @@
-
 package com.taskmgr.config;
 
 
@@ -29,7 +28,7 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**");
+		registry.addMapping("/*");
 	}
 
 	//dla resta json i 2 view resolver

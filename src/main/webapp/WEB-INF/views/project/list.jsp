@@ -10,7 +10,7 @@
 <body>
 
 
-Lista porojektów użytkownika
+Lista projektów użytkownika
 
 <div align="center">
     <h1>Project List</h1>

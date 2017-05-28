@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 /**
  * Created by Akai on 2017-04-03.
@@ -21,6 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Qualifier("customUserDetailService")
 	UserDetailsService userDetailsService;
 
+
 	@Autowired
 	public void configureGlobalSecurity(AuthenticationManagerBuilder authenticatior) throws Exception {
 		authenticatior.userDetailsService(userDetailsService);
@@ -29,14 +31,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	//TODO dodanie mapowania do security
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		http.addFilterBefore(new SimpleCorsFilter(), BasicAuthenticationFilter.class);
 		http.authorizeRequests()
 				.antMatchers("/", "/home").permitAll()
 				.antMatchers("/admin/**").access("hasRole('ADMIN')")
 				.antMatchers("/project/**").access("hasRole('ADMIN') or hasRole('MANAGER')")
 				.antMatchers("/user/**").access("hasRole('ADMIN') or hasRole('MANAGER') or hasRole('USER')")
-				.and().formLogin().loginPage("/login")
-				.usernameParameter("ssoId").passwordParameter("password")
-				.and().csrf()
-				.and().exceptionHandling().accessDeniedPage("/Access_Denied");
+				.and().logout().permitAll()
+				// logowanie dla resta
+				.and().httpBasic();
+		//.and().exceptionHandling().accessDeniedPage("/Access_Denied");
+
+		//TODO  teoretycznie to naprawy i dodanie obslugi csrf przez resta
+		http.csrf().disable().authorizeRequests().antMatchers("/").permitAll();
+
+		//http.formLogin()
+		//		.loginPage("/login").permitAll();
+
 	}
 }

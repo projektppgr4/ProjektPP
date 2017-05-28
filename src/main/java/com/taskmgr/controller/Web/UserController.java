@@ -1,6 +1,6 @@
-package com.taskmgr.controller;
+package com.taskmgr.controller.Web;
 
-import com.taskmgr.dao.*;
+import com.taskmgr.dao.UserDao;
 import com.taskmgr.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,17 +18,6 @@ import java.security.Principal;
 @Controller
 public class UserController {
 
-	@Autowired
-	ProjectDao projectDao;
-
-	@Autowired
-	IterationDao iterationDao;
-
-	@Autowired
-	StoryDao storyDao;
-
-	@Autowired
-	TaskDao taskDao;
 
 	@Autowired
 	UserDao userDao;

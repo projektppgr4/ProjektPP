@@ -1,4 +1,4 @@
-package com.taskmgr.controller;
+package com.taskmgr.controller.Web;
 
 import com.taskmgr.dao.IterationDao;
 import com.taskmgr.dao.StoryDao;

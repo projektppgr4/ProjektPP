@@ -25,4 +25,7 @@ public interface UserDao {
 	@Transactional
 	List<User> findByLastNameBegin(String lastName);
 
+	@Transactional
+	void delete(User user);
+
 }

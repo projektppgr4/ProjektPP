@@ -25,4 +25,5 @@ public interface TaskDao {
 
 	@Transactional
 	List<Story> getByStoryId(int iterationId);
+
 }

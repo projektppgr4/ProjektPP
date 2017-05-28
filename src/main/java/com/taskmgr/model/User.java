@@ -1,5 +1,7 @@
 package com.taskmgr.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -31,16 +33,18 @@ public class User {
 	@Column(name = "STATE", nullable = false)
 	private String state = State.ACTIVE.getState();
 
-
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
 	private Set<Project> projects = new HashSet<Project>(0);
 
+	@JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "APP_USER_USER_PROFILE",
 			joinColumns = {@JoinColumn(name = "USER_ID")},
 			inverseJoinColumns = {@JoinColumn(name = "USER_PROFILE_ID")})
 	private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
 
+	@JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "TASK_USER",
 			joinColumns = {@JoinColumn(name = "USER_ID")},

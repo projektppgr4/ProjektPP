@@ -1,4 +1,4 @@
-package com.taskmgr.controller;
+package com.taskmgr.controller.Web;
 
 /**
  * Created by Akai on 2017-04-04.
@@ -51,11 +51,11 @@ public class LoginController {
 
 		return "redirect:/welcome";
 	}
-
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String loginPage() {
-		return "login";
-	}
+//TODO rest to blokuje
+	//@RequestMapping(value = "/login", method = RequestMethod.GET)
+	//public String loginPage() {
+//		return "login";
+//	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
