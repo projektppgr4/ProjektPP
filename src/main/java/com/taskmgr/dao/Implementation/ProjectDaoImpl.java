@@ -44,7 +44,7 @@ public class ProjectDaoImpl extends AbstractDao<Integer, Project> implements com
 
 
 	@Transactional
-	public List<Project> findAllUserProjects(String ssoid) {
+	public List<Project> findAllUserProjectsBySsoId(String ssoid) {
 
 		Criteria criteria = getSession().createCriteria(Project.class);
 		Criteria suppCrit = criteria.createCriteria("user");
@@ -52,4 +52,15 @@ public class ProjectDaoImpl extends AbstractDao<Integer, Project> implements com
 		suppCrit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		return criteria.list();
 	}
+
+	@Transactional
+	public List<Project> findAllUserProjectsByUserId(int id) {
+
+		Criteria criteria = getSession().createCriteria(Project.class);
+		Criteria suppCrit = criteria.createCriteria("user");
+		suppCrit.add(Restrictions.eq("id", id));
+		suppCrit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		return criteria.list();
+	}
+
 }

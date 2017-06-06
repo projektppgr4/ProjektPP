@@ -1,10 +1,7 @@
 package com.taskmgr.controller.Web;
 
 import com.taskmgr.dao.*;
-import com.taskmgr.model.Iteration;
-import com.taskmgr.model.Project;
-import com.taskmgr.model.Story;
-import com.taskmgr.model.User;
+import com.taskmgr.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -41,7 +38,7 @@ public class NavigationController {
 	@RequestMapping(value = "/project/list", method = RequestMethod.GET)
 	public String projectsPage(ModelMap model, Principal principal) {
 		String userName = principal.getName();
-		List<Project> projectList = projectDao.findAllUserProjects(userName);
+		List<Project> projectList = projectDao.findAllUserProjectsBySsoId(userName);
 		User user = userDao.findBySSO(userName);
 
 		model.addAttribute("userId", user.getId());
@@ -75,7 +72,7 @@ public class NavigationController {
 	@RequestMapping(value = "/project/iteration/story/details", method = RequestMethod.GET)
 	public String storyDetails(ModelMap model, HttpServletRequest request) {
 		int storyId = Integer.parseInt(request.getParameter("id"));
-		List<Story> storyList = taskDao.getByStoryId(storyId);
+		List<Task> storyList = taskDao.getByStoryId(storyId);
 
 		model.addAttribute("storyId", storyId);
 		model.addAttribute("taskList", storyList);

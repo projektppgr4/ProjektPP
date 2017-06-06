@@ -1,5 +1,7 @@
 package com.taskmgr.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,11 +21,12 @@ public class Story {
 
 	private String name;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ITERATION_ID", nullable = true)
 	private Iteration iteration;
 
-
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "story")
 	private Set<Task> tasks = new HashSet<Task>(0);
 

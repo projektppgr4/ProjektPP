@@ -1,5 +1,6 @@
 package com.taskmgr.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -31,13 +32,16 @@ public class Iteration {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date endDate;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "PROJECT_ID", nullable = false)
 	private Project project;
 
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "iteration")
 	private Set<Story> stories = new HashSet<Story>(0);
 
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "iteration")
 	private Set<TaskStatus> taskStatuses = new HashSet<TaskStatus>(0);
 

@@ -44,5 +44,13 @@ public class TaskRestController {
 	}
 
 
+	@RequestMapping(value = "/api/storyTasks{id}")
+	public List<Task> iterationList(@PathVariable int id) {
+		List<Task> taskList = taskDao.getByStoryId(id);
+		return taskList;
+	}
+
+
+
 }
 

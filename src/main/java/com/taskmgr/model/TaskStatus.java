@@ -13,10 +13,12 @@ public class TaskStatus implements Serializable {
 	@Id
 	@Column(name = "STATUS_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private int id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ITERATION_ID", nullable = true)
+
 	private Iteration iteration;
 
 	private String name;

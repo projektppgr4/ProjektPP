@@ -19,5 +19,8 @@ public interface ProjectDao {
 	void delete(Project p);
 
 	@Transactional
-	List<Project> findAllUserProjects(String ssoid);
+	List<Project> findAllUserProjectsBySsoId(String ssoid);
+
+	@Transactional
+	List<Project> findAllUserProjectsByUserId(int id);
 }

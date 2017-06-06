@@ -1,5 +1,6 @@
 package com.taskmgr.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -20,6 +21,7 @@ public class Project {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID", nullable = true)
 	private User user;
@@ -34,6 +36,7 @@ public class Project {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date completionDate;
 
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
 	private Set<Iteration> iterations = new HashSet<Iteration>(0);
 

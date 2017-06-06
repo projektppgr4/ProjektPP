@@ -1,6 +1,8 @@
 package com.taskmgr.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.taskmgr.model.serializer.TaskSerializer;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -11,6 +13,7 @@ import javax.validation.constraints.Min;
 
 @Entity
 @Table(name = "TASK")
+@JsonSerialize(using = TaskSerializer.class)
 public class Task {
 
 	@Id
@@ -28,8 +31,8 @@ public class Task {
 	private Story story;
 
 	//TODO nie jestem pewien czy ignor czy inne rozwiazanie
-	@JsonIgnore
 	@ManyToOne
+	@JsonIgnore
 	private TaskStatus taskStatus;
 
 	public int getId() {

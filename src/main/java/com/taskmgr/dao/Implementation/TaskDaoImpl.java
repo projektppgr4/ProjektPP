@@ -2,7 +2,6 @@ package com.taskmgr.dao.Implementation;
 
 import com.taskmgr.dao.AbstractDao;
 import com.taskmgr.dao.TaskDao;
-import com.taskmgr.model.Story;
 import com.taskmgr.model.Task;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
@@ -35,10 +34,10 @@ public class TaskDaoImpl extends AbstractDao<Integer, Task> implements TaskDao {
 
 	}
 
-	public List<Story> getByStoryId(int iterationId) {
+	public List<Task> getByStoryId(int storyId) {
 		Criteria criteria = createEntityCriteria();
 		Criteria suppCrit = criteria.createCriteria("story");
-		suppCrit.add(Restrictions.eq("id", iterationId));
+		suppCrit.add(Restrictions.eq("id", storyId));
 		suppCrit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		return criteria.list();
 	}

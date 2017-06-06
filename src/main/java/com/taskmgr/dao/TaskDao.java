@@ -1,6 +1,5 @@
 package com.taskmgr.dao;
 
-import com.taskmgr.model.Story;
 import com.taskmgr.model.Task;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +23,6 @@ public interface TaskDao {
 	void saveOrUpdate(Task t);
 
 	@Transactional
-	List<Story> getByStoryId(int iterationId);
+	List<Task> getByStoryId(int storyId);
 
 }
