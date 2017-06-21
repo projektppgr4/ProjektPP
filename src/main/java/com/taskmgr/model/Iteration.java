@@ -92,4 +92,12 @@ public class Iteration {
 	public void setStories(Set<Story> stories) {
 		this.stories = stories;
 	}
+
+	public Set<TaskStatus> getTaskStatuses() {
+		return taskStatuses;
+	}
+
+	public void setTaskStatuses(Set<TaskStatus> taskStatuses) {
+		this.taskStatuses = taskStatuses;
+	}
 }

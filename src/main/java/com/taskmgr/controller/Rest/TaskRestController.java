@@ -1,7 +1,9 @@
 package com.taskmgr.controller.Rest;
 
+import com.taskmgr.dao.StoryDao;
 import com.taskmgr.dao.TaskDao;
 import com.taskmgr.model.Task;
+import com.taskmgr.model.TaskStatus;
 import com.taskmgr.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,11 +23,28 @@ public class TaskRestController {
 	private TaskDao taskDao;
 
 	@Autowired
+	private StoryDao storyDao;
+
+	@Autowired
 	private UserService userService;
 
 	@RequestMapping(value = "/api/task", method = RequestMethod.POST, consumes = {"application/json"})
 	public ResponseEntity<Task> addTask(@RequestBody Task task) {
 		System.out.println("task = " + task);
+		taskDao.saveOrUpdate(task);
+		return new ResponseEntity<Task>(task, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/api/task{id}/{status}", method = RequestMethod.POST, consumes = {"application/json"})
+	public ResponseEntity<Task> addTaskToStory(@RequestBody Task task, @PathVariable int id, @PathVariable String status) {
+		task.setStory(storyDao.getById(id));
+		List<TaskStatus> taskStatuses = new ArrayList<TaskStatus>();
+		taskStatuses.addAll(task.getStory().getIteration().getTaskStatuses());
+		for (int i = 0; i < taskStatuses.size(); i++) {
+			if (taskStatuses.get(i).getName().equals(status)) {
+				task.setTaskStatus(taskStatuses.get(i));
+			}
+		}
 		taskDao.saveOrUpdate(task);
 		return new ResponseEntity<Task>(task, HttpStatus.OK);
 	}
