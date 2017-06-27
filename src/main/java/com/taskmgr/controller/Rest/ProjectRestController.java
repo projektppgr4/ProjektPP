@@ -5,6 +5,8 @@ import com.taskmgr.dao.UserDao;
 import com.taskmgr.model.Project;
 import com.taskmgr.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -32,10 +34,11 @@ public class ProjectRestController {
 	}
 
 	@PostMapping(value = "/api/project")
-	public void createProject(@RequestBody Project project, Principal principal) {
+	public ResponseEntity<Project> createProject(@RequestBody Project project, Principal principal) {
 		User owner = userDao.findBySSO(principal.getName());
 		project.setUser(owner);
 		projectDao.saveOrUpdate(project);
+		return new ResponseEntity<Project>(project, HttpStatus.OK);
 	}
 
 }

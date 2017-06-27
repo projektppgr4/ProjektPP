@@ -34,18 +34,18 @@ public class User {
 	private String state = State.ACTIVE.getState();
 
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private Set<Project> projects = new HashSet<Project>(0);
 
 	@JsonIgnore
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "APP_USER_USER_PROFILE",
 			joinColumns = {@JoinColumn(name = "USER_ID")},
 			inverseJoinColumns = {@JoinColumn(name = "USER_PROFILE_ID")})
 	private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
 
 	@JsonIgnore
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "TASK_USER",
 			joinColumns = {@JoinColumn(name = "USER_ID")},
 			inverseJoinColumns = {@JoinColumn(name = "TASK_ID")})

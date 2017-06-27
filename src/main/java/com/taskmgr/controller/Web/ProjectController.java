@@ -43,7 +43,6 @@ public class ProjectController {
 		if (projectDao.getById(project.getId()) == null) {
 			user = (User) session.getAttribute("user");
 			project.setUser(user);
-			user.getProjects().add(project);
 		} else {
 			user = projectDao.getById(project.getId()).getUser();
 			project.setUser(user);

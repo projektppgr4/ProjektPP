@@ -69,7 +69,6 @@ public class TaskController {
 		if (taskDao.getById(task.getId()) == null) {
 			story = (Story) session.getAttribute("story");
 			task.setStory(story);
-			story.getTasks().add(task);
 		} else {
 			story = taskDao.getById(task.getId()).getStory();
 			task.setStory(story);

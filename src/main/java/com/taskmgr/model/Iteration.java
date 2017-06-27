@@ -33,16 +33,16 @@ public class Iteration {
 	private Date endDate;
 
 	@JsonIgnore
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PROJECT_ID", nullable = false)
 	private Project project;
 
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "iteration")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "iteration", cascade = CascadeType.REMOVE)
 	private Set<Story> stories = new HashSet<Story>(0);
 
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "iteration")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "iteration", cascade = CascadeType.REMOVE)
 	private Set<TaskStatus> taskStatuses = new HashSet<TaskStatus>(0);
 
 	public int getId() {

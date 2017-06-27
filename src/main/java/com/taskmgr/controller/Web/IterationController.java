@@ -43,7 +43,6 @@ public class IterationController {
 		if (iterationDao.getById(iteration.getId()) == null) {
 			project = (Project) session.getAttribute("project");
 			iteration.setProject(project);
-			project.getIterations().add(iteration);
 		} else {
 			project = iterationDao.getById(iteration.getId()).getProject();
 			iteration.setProject(project);
@@ -69,7 +68,7 @@ public class IterationController {
 		int iterationId = Integer.parseInt(request.getParameter("id"));
 		Iteration deleteIteration = iterationDao.getById(iterationId);
 		iterationDao.delete(deleteIteration);
-		return "redirect:/project/details?id=" + deleteIteration.getProject().getId();
+		return "/project/iteration/list";
 	}
 
 

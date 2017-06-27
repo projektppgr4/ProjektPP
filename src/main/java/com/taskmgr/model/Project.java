@@ -37,7 +37,7 @@ public class Project {
 	private Date completionDate;
 
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project", cascade = CascadeType.REMOVE)
 	private Set<Iteration> iterations = new HashSet<Iteration>(0);
 
 

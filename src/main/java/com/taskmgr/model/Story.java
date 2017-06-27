@@ -22,12 +22,12 @@ public class Story {
 	private String name;
 
 	@JsonIgnore
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ITERATION_ID", nullable = true)
 	private Iteration iteration;
 
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "story")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "story", cascade = CascadeType.REMOVE)
 	private Set<Task> tasks = new HashSet<Task>(0);
 
 	public int getId() {

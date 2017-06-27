@@ -39,7 +39,7 @@ public class TaskRestController {
 	public ResponseEntity<Task> addTaskToStory(@RequestBody Task task, @PathVariable int id, @PathVariable String status) {
 		task.setStory(storyDao.getById(id));
 		List<TaskStatus> taskStatuses = new ArrayList<TaskStatus>();
-		taskStatuses.addAll(task.getStory().getIteration().getTaskStatuses());
+		//taskStatuses.addAll(task.getStory().getIteration().getTaskStatuses());
 		for (int i = 0; i < taskStatuses.size(); i++) {
 			if (taskStatuses.get(i).getName().equals(status)) {
 				task.setTaskStatus(taskStatuses.get(i));

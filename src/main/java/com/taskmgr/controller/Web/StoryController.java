@@ -42,7 +42,6 @@ public class StoryController {
 		if (storyDao.getById(story.getId()) == null) {
 			iteration = (Iteration) session.getAttribute("iteration");
 			story.setIteration(iteration);
-			iteration.getStories().add(story);
 		} else {
 			iteration = storyDao.getById(story.getId()).getIteration();
 			story.setIteration(iteration);
@@ -66,8 +65,9 @@ public class StoryController {
 	public String deleteStory(ModelMap model, HttpServletRequest request) {
 		int storyId = Integer.parseInt(request.getParameter("id"));
 		Story deleteStory = storyDao.getById(storyId);
+		int iterationId = deleteStory.getIteration().getId();
 		storyDao.delete(deleteStory);
-		return "redirect:/project/iteration/details?id=" + deleteStory.getIteration().getId();
+		return "redirect:/project/iteration/details?id=" + iterationId;
 	}
 
 }

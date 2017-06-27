@@ -26,7 +26,7 @@ public class Task {
 	private int duration;
 
 	@JsonIgnore
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "STORY_ID", nullable = true)
 	private Story story;
 

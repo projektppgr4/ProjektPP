@@ -3,7 +3,6 @@ package com.taskmgr.dao.Implementation;
 import com.taskmgr.dao.AbstractDao;
 import com.taskmgr.dao.StoryDao;
 import com.taskmgr.model.Story;
-import com.taskmgr.model.Task;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -23,15 +22,6 @@ public class StoryDaoImpl extends AbstractDao<Integer, Story> implements StoryDa
 	public Story getById(int id) {
 		return getByKey(id);
 
-	}
-
-	@Override
-	public void delete(Story story) {
-		for (Task task : story.getTasks()) {
-			getSession().delete(task);
-
-		}
-		getSession().delete(story);
 	}
 
 	@Transactional
