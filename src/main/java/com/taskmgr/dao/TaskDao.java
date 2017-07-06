@@ -19,6 +19,14 @@ public interface TaskDao {
 	@Transactional
 	void delete(Task t);
 
+	/**
+	 * Use to edit task without change storyId
+	 *
+	 * @param task new values to assign
+	 */
+	@Transactional
+	void edit(Task task);
+
 	@Transactional
 	void saveOrUpdate(Task t);
 

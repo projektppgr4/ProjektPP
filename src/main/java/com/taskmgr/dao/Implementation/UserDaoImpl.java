@@ -4,6 +4,7 @@ import com.taskmgr.dao.AbstractDao;
 import com.taskmgr.dao.UserDao;
 import com.taskmgr.model.User;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,8 @@ import java.util.List;
 public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 
 	public User findById(int id) {
+		Hibernate.initialize(getByKey(id)
+				.getUserTasks());
 		return getByKey(id);
 	}
 

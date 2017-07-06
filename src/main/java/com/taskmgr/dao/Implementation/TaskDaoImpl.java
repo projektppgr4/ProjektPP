@@ -34,6 +34,15 @@ public class TaskDaoImpl extends AbstractDao<Integer, Task> implements TaskDao {
 
 	}
 
+	@Transactional
+	public void edit(Task task) {
+		Task taskToEdit = getById(task.getId());
+		taskToEdit.setName(task.getName());
+		taskToEdit.setDuration(task.getDuration());
+		taskToEdit.setTaskStatus(task.getTaskStatus());
+		saveOrUpdate(taskToEdit);
+	}
+
 	public List<Task> getByStoryId(int storyId) {
 		Criteria criteria = createEntityCriteria();
 		Criteria suppCrit = criteria.createCriteria("story");

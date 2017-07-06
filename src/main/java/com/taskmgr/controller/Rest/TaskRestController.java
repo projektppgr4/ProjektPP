@@ -4,6 +4,7 @@ import com.taskmgr.dao.StoryDao;
 import com.taskmgr.dao.TaskDao;
 import com.taskmgr.model.Task;
 import com.taskmgr.model.TaskStatus;
+import com.taskmgr.model.User;
 import com.taskmgr.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +36,14 @@ public class TaskRestController {
 		return new ResponseEntity<Task>(task, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/api/task", method = RequestMethod.PUT, consumes = {"application/json"})
+	public ResponseEntity<Task> editTask(@RequestBody Task task) {
+		//TODO check task to exist in database
+		System.out.println("task = " + task);
+		taskDao.edit(task);
+		return new ResponseEntity<Task>(task, HttpStatus.OK);
+	}
+
 	@RequestMapping(value = "/api/task{id}/{status}", method = RequestMethod.POST, consumes = {"application/json"})
 	public ResponseEntity<Task> addTaskToStory(@RequestBody Task task, @PathVariable int id, @PathVariable String status) {
 		task.setStory(storyDao.getById(id));
@@ -58,7 +67,8 @@ public class TaskRestController {
 	@RequestMapping(value = "/api/taskList{id}")
 	public List<Task> taskArrayList(@PathVariable int id) {
 		List<Task> taskList = new ArrayList<Task>();
-		taskList.addAll(userService.findById(id).getUserTasks());
+		User user = userService.findById(id);
+		taskList.addAll(user.getUserTasks());
 		return taskList;
 	}
 
