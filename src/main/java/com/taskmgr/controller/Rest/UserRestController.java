@@ -26,6 +26,8 @@ public class UserRestController {
 		return new ResponseEntity<User>(userService.findBySso(user.getSsoId()), HttpStatus.OK);
 	}
 
+	//@PreAuthorize("hasRole('ROLE_ADMIN')")
+	//TODO check user profile
 	@GetMapping(value = "/api/users")
 	public ResponseEntity<List<User>> userslist() {
 		return new ResponseEntity<List<User>>(userService.findAll(), HttpStatus.OK);
@@ -39,6 +41,7 @@ public class UserRestController {
 			return new ResponseEntity<Error>(new Error("Blad"), HttpStatus.CONFLICT);
 		}
 		userService.saveUser(newUser);
+
 		return new ResponseEntity<User>(userService.findBySso(user.getSsoId()), HttpStatus.OK);
 	}
 

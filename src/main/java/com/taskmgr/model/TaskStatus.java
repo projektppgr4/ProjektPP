@@ -1,5 +1,7 @@
 package com.taskmgr.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -18,7 +20,7 @@ public class TaskStatus implements Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ITERATION_ID", nullable = true)
-
+	@JsonIgnore
 	private Iteration iteration;
 
 	private String name;

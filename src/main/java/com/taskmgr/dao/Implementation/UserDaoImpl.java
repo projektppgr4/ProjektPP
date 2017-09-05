@@ -19,6 +19,7 @@ import java.util.List;
 public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 
 	public User findById(int id) {
+		//TODO split to two functions
 		Hibernate.initialize(getByKey(id)
 				.getUserTasks());
 		return getByKey(id);

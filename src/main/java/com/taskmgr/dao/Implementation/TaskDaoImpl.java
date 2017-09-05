@@ -4,6 +4,7 @@ import com.taskmgr.dao.AbstractDao;
 import com.taskmgr.dao.TaskDao;
 import com.taskmgr.model.Task;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +31,8 @@ public class TaskDaoImpl extends AbstractDao<Integer, Task> implements TaskDao {
 
 	@Transactional
 	public Task getById(int id) {
+		//TODO
+		Hibernate.initialize(getByKey(id).getStory().getIteration().getTaskStatuses());
 		return getByKey(id);
 
 	}

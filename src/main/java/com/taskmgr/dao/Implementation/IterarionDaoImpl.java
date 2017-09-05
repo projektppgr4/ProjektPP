@@ -4,6 +4,7 @@ import com.taskmgr.dao.AbstractDao;
 import com.taskmgr.dao.IterationDao;
 import com.taskmgr.model.Iteration;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,9 @@ public class IterarionDaoImpl extends AbstractDao<Integer, Iteration> implements
 
 	@Transactional
 	public Iteration getById(int id) {
+		//TODO split to two functions
+		Hibernate.initialize(getByKey(id)
+				.getTaskStatuses());
 		return getByKey(id);
 
 	}

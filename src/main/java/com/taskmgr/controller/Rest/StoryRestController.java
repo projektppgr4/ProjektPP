@@ -37,4 +37,16 @@ public class StoryRestController {
 		return new ResponseEntity<Story>(story, HttpStatus.OK);
 	}
 
+	@PutMapping(value = "/api/story", consumes = {"application/json"})
+	public ResponseEntity<Story> putStory(@RequestBody Story story) {
+		//TODO check task to exist in database
+		storyDao.edit(story);
+		return new ResponseEntity<Story>(story, HttpStatus.OK);
+	}
+
+	@DeleteMapping(value = "/api/story{id}", consumes = {"application/json"})
+	public ResponseEntity deleteStory(@PathVariable int id) {
+		storyDao.delete(storyDao.getById(id));
+		return new ResponseEntity(HttpStatus.ACCEPTED);
+	}
 }

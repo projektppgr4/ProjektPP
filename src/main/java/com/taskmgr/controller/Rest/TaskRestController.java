@@ -31,15 +31,27 @@ public class TaskRestController {
 
 	@RequestMapping(value = "/api/task", method = RequestMethod.POST, consumes = {"application/json"})
 	public ResponseEntity<Task> addTask(@RequestBody Task task) {
-		System.out.println("task = " + task);
 		taskDao.saveOrUpdate(task);
-		return new ResponseEntity<Task>(task, HttpStatus.OK);
+		return new ResponseEntity<Task>(task, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/api/task", method = RequestMethod.PUT, consumes = {"application/json"})
-	public ResponseEntity<Task> editTask(@RequestBody Task task) {
+	@RequestMapping(value = "/api/task{taskId}", method = RequestMethod.DELETE, consumes = {"application/json"})
+	public ResponseEntity deleteTask(@PathVariable int taskId) {
+		taskDao.delete(taskDao.getById(taskId));
+		return new ResponseEntity(HttpStatus.ACCEPTED);
+	}
+
+
+	@RequestMapping(value = "/api/task{status}", method = RequestMethod.PUT, consumes = {"application/json"})
+	public ResponseEntity<Task> editTask(@RequestBody Task task, @PathVariable String status) {
 		//TODO check task to exist in database
-		System.out.println("task = " + task);
+		List<TaskStatus> taskStatuses = new ArrayList<TaskStatus>();
+		taskStatuses.addAll(taskDao.getById(task.getId()).getStory().getIteration().getTaskStatuses());
+		for (int i = 0; i < taskStatuses.size(); i++) {
+			if (taskStatuses.get(i).getName().equals(status)) {
+				task.setTaskStatus(taskStatuses.get(i));
+			}
+		}
 		taskDao.edit(task);
 		return new ResponseEntity<Task>(task, HttpStatus.OK);
 	}
@@ -48,7 +60,7 @@ public class TaskRestController {
 	public ResponseEntity<Task> addTaskToStory(@RequestBody Task task, @PathVariable int id, @PathVariable String status) {
 		task.setStory(storyDao.getById(id));
 		List<TaskStatus> taskStatuses = new ArrayList<TaskStatus>();
-		//taskStatuses.addAll(task.getStory().getIteration().getTaskStatuses());
+		taskStatuses.addAll(storyDao.getById(id).getIteration().getTaskStatuses());
 		for (int i = 0; i < taskStatuses.size(); i++) {
 			if (taskStatuses.get(i).getName().equals(status)) {
 				task.setTaskStatus(taskStatuses.get(i));

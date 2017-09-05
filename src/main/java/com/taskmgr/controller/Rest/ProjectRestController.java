@@ -41,4 +41,10 @@ public class ProjectRestController {
 		return new ResponseEntity<Project>(project, HttpStatus.OK);
 	}
 
+	@DeleteMapping(value = "/api/project{id}", consumes = {"application/json"})
+	public ResponseEntity deleteProject(@PathVariable int id) {
+		projectDao.delete(projectDao.getById(id));
+		return new ResponseEntity(HttpStatus.ACCEPTED);
+	}
+
 }

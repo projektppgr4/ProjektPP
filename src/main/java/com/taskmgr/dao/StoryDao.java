@@ -10,6 +10,14 @@ import java.util.List;
  */
 public interface StoryDao {
 
+	/**
+	 * Use to edit task without change iterationId
+	 *
+	 * @param task new values to assign
+	 */
+	@Transactional
+	void edit(Story story);
+
 	@Transactional
 	void saveOrUpdate(Story s);
 
