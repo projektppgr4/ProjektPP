@@ -47,4 +47,11 @@ public class ProjectRestController {
 		return new ResponseEntity(HttpStatus.ACCEPTED);
 	}
 
+	@PutMapping(value = "/api/project", consumes = {"application/json"})
+	public ResponseEntity<Project> putProject(@RequestBody Project project) {
+		//TODO check project to exist in database
+		projectDao.edit(project);
+		return new ResponseEntity<Project>(project, HttpStatus.OK);
+	}
+
 }

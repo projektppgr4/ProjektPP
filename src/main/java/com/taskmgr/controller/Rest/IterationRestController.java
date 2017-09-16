@@ -19,11 +19,14 @@ import java.util.List;
 @RestController
 public class IterationRestController {
 
-	@Autowired
-	IterationDao iterationDao;
+	private IterationDao iterationDao;
+	private ProjectDao projectDao;
 
 	@Autowired
-	ProjectDao projectDao;
+	public IterationRestController(IterationDao iterationDao, ProjectDao projectDao) {
+		this.iterationDao = iterationDao;
+		this.projectDao = projectDao;
+	}
 
 	@RequestMapping(value = "/api/iteration{id}/statuses")
 	public List<TaskStatus> getAviableStates(@PathVariable int id) {

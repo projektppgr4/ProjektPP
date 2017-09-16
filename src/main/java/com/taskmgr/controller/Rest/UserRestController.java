@@ -1,5 +1,6 @@
 package com.taskmgr.controller.Rest;
 
+import com.taskmgr.model.Task;
 import com.taskmgr.model.User;
 import com.taskmgr.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,17 @@ public class UserRestController {
 
 		return new ResponseEntity<User>(userService.findBySso(user.getSsoId()), HttpStatus.OK);
 	}
+
+	@PostMapping(value = "/api/user{userId}/task")
+	public ResponseEntity<?> AssignTask(@PathVariable int userId, @RequestBody Task task) {
+		User user = userService.findById(userId);
+		user.getUserTasks().add(task);
+		userService.saveUser(user);
+		return new ResponseEntity<User>(user, HttpStatus.OK);
+	}
+
+
+
 
 	@DeleteMapping(value = "/api/users{id}")
 	public HttpStatus deleteUser(@PathVariable int id) {

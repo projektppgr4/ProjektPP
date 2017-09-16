@@ -44,4 +44,13 @@ public class ProjectDaoImpl extends AbstractDao<Integer, Project> implements com
 		return criteria.list();
 	}
 
+	public void edit(Project project) {
+		Project projectToEdit = getById(project.getId());
+		projectToEdit.setName(project.getName());
+		projectToEdit.setDescription(project.getDescription());
+		projectToEdit.setStartDate(project.getStartDate());
+		projectToEdit.setCompletionDate(project.getCompletionDate());
+		saveOrUpdate(projectToEdit);
+	}
+
 }

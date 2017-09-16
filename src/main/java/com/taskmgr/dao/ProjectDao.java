@@ -23,4 +23,12 @@ public interface ProjectDao {
 
 	@Transactional
 	List<Project> findAllUserProjectsByUserId(int id);
+
+	/**
+	 * Use to edit project without change projectId
+	 *
+	 * @param project new values to assign
+	 */
+	@Transactional
+	void edit(Project project);
 }
