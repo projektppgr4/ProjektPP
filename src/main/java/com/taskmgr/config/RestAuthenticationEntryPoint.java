@@ -11,7 +11,8 @@ import java.io.IOException;
 /**
  * Created by Akai on 2017-05-24.
  */
-//TODO sprawdzic czty to jest wogole potrzebne
+//TODO sprawdzic czy to jest wogóle potrzebne
+//powinno autoryzowac wejście przez resta
 @Component("restAuthenticationEntryPoint")
 public class RestAuthenticationEntryPoint
 		implements AuthenticationEntryPoint {

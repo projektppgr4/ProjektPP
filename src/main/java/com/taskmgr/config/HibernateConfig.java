@@ -26,11 +26,21 @@ import java.util.Properties;
 @PropertySource(value = {"classpath:database.properties"})
 public class HibernateConfig {
 
-	@Autowired
+
 	private Environment environment;
 
+	@Autowired
+	public HibernateConfig(Environment environment) {
+		this.environment = environment;
+	}
 
-	@Bean //ustawienie parametrow połączenia do bazy danych
+
+	/**
+	 * Sets parameters of datasource depends on properties file
+	 *
+	 * @return configured DataSource
+	 */
+	@Bean
 	public DataSource getDataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName(environment.getProperty("database.driver"));
@@ -41,6 +51,10 @@ public class HibernateConfig {
 		return dataSource;
 	}
 
+	/**
+	 * Sets parameters of hibernate configuration depends on properties file
+	 * @return properties with can be use to configure hibernate
+	 */
 	@Bean
 	public Properties hibernateProperties() {
 		Properties properties = new Properties();
@@ -51,6 +65,10 @@ public class HibernateConfig {
 		return properties;
 	}
 
+	/**
+	 * Create Session factory
+	 * @return SessionFactory
+	 */
 	@Bean(name = "sessionFactory")
 	public SessionFactory sessionFactory() {
 		LocalSessionFactoryBean lsfb = new LocalSessionFactoryBean();
@@ -62,18 +80,19 @@ public class HibernateConfig {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		return lsfb.getObject();
 	}
 
+	/**
+	 * Create transaction manager
+	 * @param sessionFactory    sessionfactory with will be transactional
+	 * @return transaction manager
+	 */
 	@Autowired
 	@Bean(name = "transactionManager")
 	public HibernateTransactionManager getTransactionManager(
 			SessionFactory sessionFactory) {
-		HibernateTransactionManager transactionManager = new HibernateTransactionManager(
-				sessionFactory);
-
-		return transactionManager;
+		return new HibernateTransactionManager(sessionFactory);
 	}
 
 }

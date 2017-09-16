@@ -17,35 +17,56 @@ import java.util.List;
 @RestController
 public class UserRestController {
 
-	@Autowired
+
 	private UserService userService;
 
+	@Autowired
+	public UserRestController(UserService userService) {
+		this.userService = userService;
+	}
+
+	/**
+	 * Login to server
+	 *
+	 * @param user values to login
+	 * @return user and response of server status
+	 */
 	@PostMapping(value = "/api/login")
 	public ResponseEntity<User> login(@RequestBody User user) {
-
-
 		return new ResponseEntity<User>(userService.findBySso(user.getSsoId()), HttpStatus.OK);
 	}
 
+	/**
+	 * Get all user in database
+	 * @return List of all user in database
+	 */
 	//@PreAuthorize("hasRole('ROLE_ADMIN')")
-	//TODO check user profile
 	@GetMapping(value = "/api/users")
-	public ResponseEntity<List<User>> userslist() {
+	public ResponseEntity<List<User>> usersList() {
 		return new ResponseEntity<List<User>>(userService.findAll(), HttpStatus.OK);
 	}
 
+	/**
+	 * Register new user in database
+	 * @param user new user values
+	 * @return user and response of server status
+	 */
 	@PostMapping(value = "/api/users")
 	public ResponseEntity<?> registerUser(@RequestBody User user) {
-		User newUser = user;
 		if (userService.findBySso(user.getSsoId()) != null) {
 			//TODO zrobic zeby dzialalo
 			return new ResponseEntity<Error>(new Error("Blad"), HttpStatus.CONFLICT);
 		}
-		userService.saveUser(newUser);
-
+		userService.saveUser(user);
 		return new ResponseEntity<User>(userService.findBySso(user.getSsoId()), HttpStatus.OK);
 	}
 
+	/**
+	 * Assign new task to user
+	 * @param userId id of user
+	 * @param task to assign
+	 * @return user and response of server status
+	 */
 	@PostMapping(value = "/api/user{userId}/task")
 	public ResponseEntity<?> AssignTask(@PathVariable int userId, @RequestBody Task task) {
 		User user = userService.findById(userId);
@@ -55,27 +76,27 @@ public class UserRestController {
 	}
 
 
-
-
-	@DeleteMapping(value = "/api/users{id}")
-	public HttpStatus deleteUser(@PathVariable int id) {
-		userService.deleteById(id);
-
+	/**
+	 * Delete user from database
+	 *
+	 * @param userId id of user
+	 * @return server status response
+	 */
+	@DeleteMapping(value = "/api/users{userId}")
+	public HttpStatus deleteUser(@PathVariable int userId) {
+		userService.deleteById(userId);
 		return HttpStatus.OK;
 	}
 
 
 	public class Error {
 		private String message;
-
 		public Error(String message) {
 			this.message = message;
 		}
-
 		public String getMessage() {
 			return message;
 		}
-
 		public void setMessage(String message) {
 			this.message = message;
 		}

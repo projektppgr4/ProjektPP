@@ -17,36 +17,61 @@ import java.util.List;
 @RestController
 public class StoryRestController {
 
-	@Autowired
-	StoryDao storyDao;
+	private StoryDao storyDao;
+	private IterationDao iterationDao;
 
 	@Autowired
-	IterationDao iterationDao;
-
-	@RequestMapping(value = "/api/storyList{id}")
-	public List<Story> taskArrayList(@PathVariable int id) {
-		List<Story> storyList = storyDao.getByIterationId(id);
-		return storyList;
+	public StoryRestController(StoryDao storyDao, IterationDao iterationDao) {
+		this.storyDao = storyDao;
+		this.iterationDao = iterationDao;
 	}
 
+	/**
+	 * Get list of tasks in iteration
+	 *
+	 * @param iterationId id of iteration
+	 * @return list of tasks in iteration
+	 */
+	@RequestMapping(value = "/api/storyList{iterationId}")
+	public List<Story> taskList(@PathVariable int iterationId) {
+		return storyDao.getByIterationId(iterationId);
+	}
 
-	@RequestMapping(value = "/api/story{id}", method = RequestMethod.POST, consumes = {"application/json"})
-	public ResponseEntity<Story> addStory(@RequestBody Story story, @PathVariable int id) {
-		story.setIteration(iterationDao.getById(id));
+	/**
+	 * Add Story to iteration
+	 *
+	 * @param story       to add
+	 * @param iterationId iteration id
+	 * @return story and server status response
+	 */
+	@PostMapping(value = "/api/story{iterationId}", consumes = {"application/json"})
+	public ResponseEntity<Story> addStory(@RequestBody Story story, @PathVariable int iterationId) {
+		story.setIteration(iterationDao.getById(iterationId));
 		storyDao.saveOrUpdate(story);
 		return new ResponseEntity<Story>(story, HttpStatus.OK);
 	}
 
+	/**
+	 * Edit story without change it id
+	 * @param story value to edit
+	 * @return	story and server status response
+	 */
 	@PutMapping(value = "/api/story", consumes = {"application/json"})
-	public ResponseEntity<Story> putStory(@RequestBody Story story) {
+	public ResponseEntity<Story> editStory(@RequestBody Story story) {
 		//TODO check task to exist in database
 		storyDao.edit(story);
 		return new ResponseEntity<Story>(story, HttpStatus.OK);
 	}
 
-	@DeleteMapping(value = "/api/story{id}", consumes = {"application/json"})
-	public ResponseEntity deleteStory(@PathVariable int id) {
-		storyDao.delete(storyDao.getById(id));
+	/**
+	 * Delete story
+	 *
+	 * @param storyId id of story to delete
+	 * @return server status
+	 */
+	@DeleteMapping(value = "/api/story{storyId}", consumes = {"application/json"})
+	public ResponseEntity deleteStory(@PathVariable int storyId) {
+		storyDao.delete(storyDao.getById(storyId));
 		return new ResponseEntity(HttpStatus.ACCEPTED);
 	}
 }

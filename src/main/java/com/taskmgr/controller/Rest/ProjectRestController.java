@@ -19,20 +19,33 @@ import java.util.List;
 @RestController
 public class ProjectRestController {
 
-	@Autowired
-	ProjectDao projectDao;
+
+	private ProjectDao projectDao;
+	private UserDao userDao;
 
 	@Autowired
-	UserDao userDao;
-
-
-	@RequestMapping(value = "/api/projectList{id}")
-	public List<Project> taskArrayList(@PathVariable int id) {
-		List<Project> projectList = projectDao.findAllUserProjectsByUserId(id);
-
-		return projectList;
+	public ProjectRestController(ProjectDao projectDao, UserDao userDao) {
+		this.projectDao = projectDao;
+		this.userDao = userDao;
 	}
 
+	/**
+	 * Get list of user projects
+	 *
+	 * @param userId id of user
+	 * @return list of user projects
+	 */
+	@RequestMapping(value = "/api/projectList{userId}")
+	public List<Project> taskArrayList(@PathVariable int userId) {
+		return projectDao.findAllUserProjectsByUserId(userId);
+	}
+
+	/**
+	 * Create new project to actually logged user
+	 * @param project    configured project
+	 * @param principal logged user
+	 * @return Project and server response
+	 */
 	@PostMapping(value = "/api/project")
 	public ResponseEntity<Project> createProject(@RequestBody Project project, Principal principal) {
 		User owner = userDao.findBySSO(principal.getName());
@@ -41,14 +54,26 @@ public class ProjectRestController {
 		return new ResponseEntity<Project>(project, HttpStatus.OK);
 	}
 
-	@DeleteMapping(value = "/api/project{id}", consumes = {"application/json"})
-	public ResponseEntity deleteProject(@PathVariable int id) {
-		projectDao.delete(projectDao.getById(id));
+	/**
+	 * Delete project from database
+	 *
+	 * @param projectId id of project
+	 * @return server response status
+	 */
+	@DeleteMapping(value = "/api/project{projectId}", consumes = {"application/json"})
+	public ResponseEntity deleteProject(@PathVariable int projectId) {
+		projectDao.delete(projectDao.getById(projectId));
 		return new ResponseEntity(HttpStatus.ACCEPTED);
 	}
 
+	/**
+	 * Edit parameters of project without change it id
+	 * @param project value to insert
+	 * @return project and server status response
+	 */
+
 	@PutMapping(value = "/api/project", consumes = {"application/json"})
-	public ResponseEntity<Project> putProject(@RequestBody Project project) {
+	public ResponseEntity<Project> editProject(@RequestBody Project project) {
 		//TODO check project to exist in database
 		projectDao.edit(project);
 		return new ResponseEntity<Project>(project, HttpStatus.OK);

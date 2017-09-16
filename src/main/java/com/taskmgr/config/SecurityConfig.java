@@ -31,6 +31,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	//TODO dodanie mapowania do security
+
+	/**
+	 * Security configuration
+	 *
+	 * @param http address of entry point of server
+	 * @throws Exception
+	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.addFilterBefore(new SimpleCorsFilter(), BasicAuthenticationFilter.class);

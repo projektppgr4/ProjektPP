@@ -10,12 +10,27 @@ import java.util.List;
  */
 
 public interface TaskDao {
+
+	/**
+	 * Get all tasks in database
+	 *
+	 * @return List of all task in database
+	 */
 	@Transactional
 	List<Task> findAll();
 
+	/**
+	 * Get task by its id
+	 * @param id id of requested task
+	 * @return task
+	 */
 	@Transactional
 	Task getById(int id);
 
+	/**
+	 * Delete task from database
+	 * @param t task
+	 */
 	@Transactional
 	void delete(Task t);
 
@@ -27,9 +42,18 @@ public interface TaskDao {
 	@Transactional
 	void edit(Task task);
 
+	/**
+	 * Use to edit with !!! change taskId
+	 * @param t task
+	 */
 	@Transactional
 	void saveOrUpdate(Task t);
 
+	/**
+	 * Get all tasks in story
+	 * @param storyId story id
+	 * @return List of all tasks in story
+	 */
 	@Transactional
 	List<Task> getByStoryId(int storyId);
 

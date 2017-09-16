@@ -20,75 +20,120 @@ import java.util.List;
 @RestController
 public class TaskRestController {
 
-	@Autowired
 	private TaskDao taskDao;
-
-	@Autowired
 	private StoryDao storyDao;
-
-	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = "/api/task", method = RequestMethod.POST, consumes = {"application/json"})
+	@Autowired
+	public TaskRestController(TaskDao taskDao, StoryDao storyDao, UserService userService) {
+		this.taskDao = taskDao;
+		this.storyDao = storyDao;
+		this.userService = userService;
+	}
+
+	/**
+	 * Add new task without set its story
+	 * Only to test use !!!
+	 *
+	 * @param task task to add
+	 * @return task and server response status
+	 */
+	@Deprecated
+	@PostMapping(value = "/api/task", consumes = {"application/json"})
 	public ResponseEntity<Task> addTask(@RequestBody Task task) {
 		taskDao.saveOrUpdate(task);
 		return new ResponseEntity<Task>(task, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/api/task{taskId}", method = RequestMethod.DELETE, consumes = {"application/json"})
+	/**
+	 * Delete test by its id
+	 *
+	 * @param taskId id of task to delete
+	 * @return Server response and status
+	 */
+	@DeleteMapping(value = "/api/task{taskId}", consumes = {"application/json"})
 	public ResponseEntity deleteTask(@PathVariable int taskId) {
 		taskDao.delete(taskDao.getById(taskId));
 		return new ResponseEntity(HttpStatus.ACCEPTED);
 	}
 
-
-	@RequestMapping(value = "/api/task{status}", method = RequestMethod.PUT, consumes = {"application/json"})
+	/**
+	 * Edit task without change its id
+	 *
+	 * @param task   values of task to edit
+	 * @param status new status of task
+	 * @return task and server status response
+	 */
+	@PutMapping(value = "/api/task{status}", consumes = {"application/json"})
 	public ResponseEntity<Task> editTask(@RequestBody Task task, @PathVariable String status) {
 		//TODO check task to exist in database
 		List<TaskStatus> taskStatuses = new ArrayList<TaskStatus>();
 		taskStatuses.addAll(taskDao.getById(task.getId()).getStory().getIteration().getTaskStatuses());
-		for (int i = 0; i < taskStatuses.size(); i++) {
-			if (taskStatuses.get(i).getName().equals(status)) {
-				task.setTaskStatus(taskStatuses.get(i));
+		for (TaskStatus statues : taskStatuses) {
+			if (statues.getName().equals(status))
+			{
+				task.setTaskStatus(statues);
 			}
 		}
 		taskDao.edit(task);
 		return new ResponseEntity<Task>(task, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/api/task{id}/{status}", method = RequestMethod.POST, consumes = {"application/json"})
-	public ResponseEntity<Task> addTaskToStory(@RequestBody Task task, @PathVariable int id, @PathVariable String status) {
-		task.setStory(storyDao.getById(id));
+	/**
+	 * Add new task to story and sets its status
+	 *
+	 * @param task    values of task
+	 * @param storyId if of story
+	 * @param status  new task status
+	 * @return task and server status response
+	 */
+	@PostMapping(value = "/api/task{storyId}/{status}", consumes = {"application/json"})
+	public ResponseEntity<Task> addTaskToStory(@RequestBody Task task, @PathVariable int storyId, @PathVariable String status) {
+		task.setStory(storyDao.getById(storyId));
 		List<TaskStatus> taskStatuses = new ArrayList<TaskStatus>();
-		taskStatuses.addAll(storyDao.getById(id).getIteration().getTaskStatuses());
-		for (int i = 0; i < taskStatuses.size(); i++) {
-			if (taskStatuses.get(i).getName().equals(status)) {
-				task.setTaskStatus(taskStatuses.get(i));
+		taskStatuses.addAll(storyDao.getById(storyId).getIteration().getTaskStatuses());
+		for (TaskStatus statues:taskStatuses) {
+			if(statues.getName().equals(status))
+			{
+				task.setTaskStatus(statues);
 			}
 		}
 		taskDao.saveOrUpdate(task);
 		return new ResponseEntity<Task>(task, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/api/taskList", method = RequestMethod.GET)
+	/**
+	 * Get all task in database
+	 * @return list of all task in database
+	 */
+	@GetMapping(value = "/api/taskList")
 	public List<Task> allTaskList() {
 		return taskDao.findAll();
 	}
 
-
-	@RequestMapping(value = "/api/taskList{id}")
-	public List<Task> taskArrayList(@PathVariable int id) {
+	/**
+	 * Get all task of selected user
+	 *
+	 * @param userId id of user
+	 * @return list of all user tasks
+	 */
+	@RequestMapping(value = "/api/taskList{userId}")
+	public List<Task> getUserTasksList(@PathVariable int userId) {
 		List<Task> taskList = new ArrayList<Task>();
-		User user = userService.findById(id);
+		User user = userService.findById(userId);
 		taskList.addAll(user.getUserTasks());
 		return taskList;
 	}
 
-
-	@RequestMapping(value = "/api/storyTasks{id}")
-	public List<Task> iterationList(@PathVariable int id) {
-		List<Task> taskList = taskDao.getByStoryId(id);
-		return taskList;
+	/**
+	 * Get all tasks in story
+	 *
+	 * @param storyId id of story
+	 * @return List of tasks
+	 */
+	@RequestMapping(value = "/api/storyTasks{storyId}")
+	public List<Task> iterationList(@PathVariable int storyId) {
+		return taskDao.getByStoryId(storyId);
 	}
 
 

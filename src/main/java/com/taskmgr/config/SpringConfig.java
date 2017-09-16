@@ -31,7 +31,14 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
 		registry.addMapping("/*");
 	}
 
-	//dla resta json i 2 view resolver
+
+	/**
+	 * View resolver to REST and web communication
+	 * REST gonna use Json to communication
+	 *
+	 * @param manager Content Negotiotion manager
+	 * @return configured viev resolver
+	 */
 	@Bean
 	public ViewResolver contentNegotiatingViewResolver(
 			ContentNegotiationManager manager) {
@@ -60,6 +67,9 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
 		return messageSource;
 	}
 
+	/**
+	 * Json mapping view resolver
+	 */
 	public class JsonViewResolver implements ViewResolver {
 		public View resolveViewName(String viewName, Locale locale) throws Exception {
 			MappingJackson2JsonView view = new MappingJackson2JsonView();

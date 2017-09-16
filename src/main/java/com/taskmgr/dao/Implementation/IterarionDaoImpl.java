@@ -20,11 +20,11 @@ public class IterarionDaoImpl extends AbstractDao<Integer, Iteration> implements
 
 
 	@Transactional
-	public Iteration getById(int id) {
+	public Iteration getById(int iterationId) {
 		//TODO split to two functions
-		Hibernate.initialize(getByKey(id)
+		Hibernate.initialize(getByKey(iterationId)
 				.getTaskStatuses());
-		return getByKey(id);
+		return getByKey(iterationId);
 
 	}
 

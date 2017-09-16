@@ -12,17 +12,26 @@ import java.io.IOException;
 /**
  * Created by Akai on 2017-05-24.
  * To jest tak magiczne ze nie wiem co sie dzieje i czemu
+ * Pozwala komunikować sie dwum niezależnym serverom na jednym komputerze
  */
 @Component
 public class SimpleCorsFilter implements Filter {
 
-
+	/**
+	 * Set headers of server responses to allow cross server communication
+	 *
+	 * @param req   requests of server
+	 * @param res   response of server
+	 * @param chain filters
+	 * @throws IOException
+	 * @throws ServletException
+	 */
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
 
-		//headery sa potrzebne bo inaczej nie mo komunikacji pomiedzy serwerami
+		//headery sa potrzebne bo inaczej nie ma komunikacji pomiedzy serwerami
 		response.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
 		response.setHeader("Access-Control-Allow-Credentials", "true");
 		response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT");
@@ -39,10 +48,8 @@ public class SimpleCorsFilter implements Filter {
 
 	}
 
-
 	public void init(FilterConfig filterConfig) {
 	}
-
 
 	public void destroy() {
 	}
